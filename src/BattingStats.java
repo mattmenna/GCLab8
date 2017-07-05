@@ -20,44 +20,45 @@ public class BattingStats {
 
         int numbOfHits = 0;
         int slug = 0;
+        boolean cont = true;
 
         System.out.println("Welcome to Batting Average Calculator!\n");
-boolean cont=true;
-while (cont ==true) {
-    String pName = validator.getRequiredString("Whats the player's name?:");
 
-    System.out.println("0=out, 1=single, 2=double, 3=triple, 4=home run");
+        while (cont == true) {
+            String pName = validator.getRequiredString("Whats the player's name?:");
 
-    int numAtBats = validator.getInt("Enter number of times at bat:");
-    int[] bases = new int[numAtBats];
+            System.out.println("0=out, 1=single, 2=double, 3=triple, 4=home run");
 
-    for (int i = 0; i < bases.length; i++) {
-        //System.out.println(i);
-        bases[i] = validator.getInt("Result for at bat " + (i + 1) + ":");
-        numbOfHits = getNumbOfHits(bases[i], numbOfHits);
-        slug += bases[i];
-    }
+            int numAtBats = validator.getInt("Enter number of times at bat:");
+            int[] bases = new int[numAtBats];
 
-    float battingAvg = getBattingAvg(numAtBats, numbOfHits);
-    float sluggingPct = getSluggingPct(numAtBats, slug);
+            for (int i = 0; i < bases.length; i++) {
+                //System.out.println(i);
+                bases[i] = validator.getInt("Result for at bat " + (i + 1) + ":");
+                numbOfHits = getNumbOfHits(bases[i], numbOfHits);
+                slug += bases[i];
+            }
 
-    System.out.printf("%s had a batting average of %.3f\n", pName, battingAvg);
-    System.out.printf("%s had a slugging percentage of %.3f", pName, sluggingPct);
-    System.out.println();
-    cont = validator.getContinue("Continue?");
-}
+            float battingAvg = getBattingAvg(numAtBats, numbOfHits);
+            float sluggingPct = getSluggingPct(numAtBats, slug);
+
+            System.out.printf("%s had a batting average of %.3f\n", pName, battingAvg);
+            System.out.printf("%s had a slugging percentage of %.3f\n", pName, sluggingPct);
+            System.out.println();
+            cont = validator.getContinue("Continue?");
+        }
     }
 
     private static float getSluggingPct(float numAtBats, float slug) {
-        return (slug / numAtBats)*100;
+        return (slug / numAtBats);
     }
 
     private static float getBattingAvg(float numAtBats, float numbOfHits) {
-        return (numbOfHits / numAtBats)*100;
+        return (numbOfHits / numAtBats);
     }
 
     private static int getNumbOfHits(int basis, int numbOfHits) {
-        if(basis >= 1){
+        if (basis >= 1) {
             numbOfHits += 1;
         }
         return numbOfHits;
