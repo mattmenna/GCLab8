@@ -25,11 +25,25 @@ public class BattingStats {
 
         int numAtBats = validator.getInt("How many at bats?");
         int[] bases = new int[numAtBats];
+        int numbOfHits = 0;
+        int slug = 0;
 
         for (int i = 0; i < bases.length; i++) {
-            System.out.println(i);
-            bases[i] = validator.getInt("How many bases?");
+            //System.out.println(i);
+            bases[i] = validator.getInt("Please enter the number of bases for at bat number" + (i+1));
+            if(bases[i]>= 1){
+                numbOfHits += bases[i];
+            }
+            slug += bases[i];
+
         }
+
+
+        float battingAvg = (numbOfHits/numAtBats)*100;
+        float sluggingPct = (slug/numAtBats)*100;
+
+        System.out.printf("%s  had a batting average of %.3f\n", pName, battingAvg);
+        System.out.printf("%s  had a slugging percentage of %.3f", pName, sluggingPct);
 
     }
 }
