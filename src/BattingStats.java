@@ -16,32 +16,36 @@ public class BattingStats {
     public static void main(String[] args) {
 
         Scanner scnr = new Scanner(System.in);
-        OOValidator validator = new OOValidator();
-        MyValidator stringValidator = new MyValidator();
+        MyValidator validator = new MyValidator();
+
         int numbOfHits = 0;
         int slug = 0;
 
-        System.out.println("Welcome to Batting Average Calculator!\nWhats the player's name?:");
-        String pName = scnr.nextLine();
+        System.out.println("Welcome to Batting Average Calculator!\n");
+boolean cont=true;
+while (cont ==true) {
+    String pName = validator.getRequiredString("Whats the player's name?:");
 
-        System.out.println("0=out, 1=single, 2=double, 3=triple, 4=home run");
+    System.out.println("0=out, 1=single, 2=double, 3=triple, 4=home run");
 
-        int numAtBats = validator.getInt("Enter number of times at bat:");
-        int[] bases = new int[numAtBats];
+    int numAtBats = validator.getInt("Enter number of times at bat:");
+    int[] bases = new int[numAtBats];
 
-        for (int i = 0; i < bases.length; i++) {
-            //System.out.println(i);
-            bases[i] = validator.getInt("Result for at bat " + (i+1)+ ":");
-            numbOfHits = getNumbOfHits(bases[i], numbOfHits);
-            slug += bases[i];
-        }
+    for (int i = 0; i < bases.length; i++) {
+        //System.out.println(i);
+        bases[i] = validator.getInt("Result for at bat " + (i + 1) + ":");
+        numbOfHits = getNumbOfHits(bases[i], numbOfHits);
+        slug += bases[i];
+    }
 
-        float battingAvg = getBattingAvg(numAtBats, numbOfHits);
-        float sluggingPct = getSluggingPct(numAtBats, slug);
+    float battingAvg = getBattingAvg(numAtBats, numbOfHits);
+    float sluggingPct = getSluggingPct(numAtBats, slug);
 
-        System.out.printf("%s had a batting average of %.3f\n", pName, battingAvg);
-        System.out.printf("%s had a slugging percentage of %.3f", pName, sluggingPct);
-
+    System.out.printf("%s had a batting average of %.3f\n", pName, battingAvg);
+    System.out.printf("%s had a slugging percentage of %.3f", pName, sluggingPct);
+    System.out.println();
+    cont = validator.getContinue("Continue?");
+}
     }
 
     private static float getSluggingPct(float numAtBats, float slug) {
